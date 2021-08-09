@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     db.findOne({ name: 'anneka smith' }, function (err, doc) {
         console.log(err);
         console.log('Found user:', doc.name);
-        res.send('Hello World!')
+        res.send(doc.name)
     });
 });
 
