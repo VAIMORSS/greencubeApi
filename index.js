@@ -13,19 +13,13 @@ const corsOptions = {
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
+
 app.use(cors(corsOptions));
+
 
 var db = new Datastore({
     filename: path.join(path.resolve(), "/tmp/database.db")
     , autoload: true
-});
-
-app.get('/', (req, res) => {
-    db.findOne({ name: 'anneka smith' }, function (err, doc) {
-        console.log(err);
-        console.log('Found user:', doc.name);
-        res.send(doc.name)
-    });
 });
 
 app.get('/users', (req, res) => {
@@ -41,15 +35,22 @@ app.get('/users/search', (req, res) => {
     })
 })
 
+app.get('/users/dashboardinfo', async (req, res) => {
+    db.count({ interest: req.query.interest }, (err, count) => {
+        res.send(`${count}`);
+    })
+
+})
+
 app.get('/loadata', async (req, res) => {
     await loadata();
     res.sendStatus(200);
-
 })
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
+
 
 
 // https://github.com/Harsh-Tuwar/my_node_api
