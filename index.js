@@ -5,19 +5,33 @@ import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 4040;
+const USERS_PER_PAGE = 20;
+
+var db = new Datastore({
+    filename: path.join(path.resolve(), "/tmp/database.db")
+    , autoload: true
+});
 
 app.get('/', (req, res) => {
-
-    var db = new Datastore({
-        filename: path.join(path.resolve(), "/tmp/database.db")
-        , autoload: true
-    });
     db.findOne({ name: 'anneka smith' }, function (err, doc) {
         console.log(err);
         console.log('Found user:', doc.name);
         res.send(doc.name)
     });
 });
+
+app.get('/users', (req, res) => {
+    db.find({}).skip((req.query.page - 1) * (USERS_PER_PAGE)).limit(req.query.limit).exec((err, docs) => {
+        res.send(docs);
+    })
+})
+
+app.get('/users/search', (req, res) => {
+    db.find({ name: new RegExp(`${req.query.query}`) }
+    ).limit(USERS_PER_PAGE).exec((err, docs) => {
+        res.send(docs);
+    })
+})
 
 app.get('/loadata', async (req, res) => {
     await loadata();
