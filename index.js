@@ -9,7 +9,7 @@ const port = process.env.PORT || 4040;
 const USERS_PER_PAGE = 20;
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://greencubefrontend.vercel.app/',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
