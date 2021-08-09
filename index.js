@@ -53,6 +53,3 @@ app.listen(port, () => {
 
 
 
-// https://github.com/Harsh-Tuwar/my_node_api
-
-
