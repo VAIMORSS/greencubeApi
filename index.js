@@ -48,7 +48,7 @@ app.get('/loadata', async (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    //for the dev purpose
 });
 
 
