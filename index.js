@@ -4,7 +4,7 @@ import Datastore from 'nedb';
 import path from 'path';
 
 const app = express();
-const port = 4040;
+const port = process.env.PORT || 4040;
 
 app.get('/', (req, res) => {
 
