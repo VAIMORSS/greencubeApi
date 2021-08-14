@@ -9,13 +9,12 @@ const port = process.env.PORT || 4040;
 const USERS_PER_PAGE = 20;
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://greencubefrontend.vercel.app'],
+    origin: '*',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
 
 app.use(cors(corsOptions));
-
 
 var db = new Datastore({
     filename: path.join(path.resolve(), "/tmp/database.db")
