@@ -9,7 +9,7 @@ const port = process.env.PORT || 4040;
 const USERS_PER_PAGE = 20;
 
 const corsOptions = {
-    origin: '*',
+    origin: ['https://myeffect-frontend.vercel.app/', 'http://localhost:4000/'],
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
